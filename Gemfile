@@ -9,7 +9,7 @@ ruby "2.5.1"
 
 # Backend
 gem 'rails', '5.2.3'
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.12'
 gem 'redis', '~> 4.0'
 gem 'rest-client'
 
