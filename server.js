@@ -33,7 +33,7 @@ app.prepare().then(() => {
     createShopifyAuth({
       apiKey: SHOPIFY_API_KEY,
       secret: SHOPIFY_API_SECRET_KEY,
-      scopes: ['read_products', 'write_products'],
+      scopes: ['read_products'],
       async afterAuth(ctx) {
         const { shop, accessToken } = ctx.session;
         ctx.cookies.set("shopOrigin", shop, {
@@ -43,6 +43,7 @@ app.prepare().then(() => {
         });
         const registration = await registerWebhook({
           address: `${HOST}/webhooks/products/create`,
+          // address: 'http://dd50705e.ngrok.io/webhooks/products/create',
           topic: 'PRODUCTS_CREATE',
           accessToken,
           shop,
@@ -52,7 +53,7 @@ app.prepare().then(() => {
         if (registration.success) {
           console.log('Successfully registered webhook!');
         } else {
-          console.log('Failed to register webhook', registration.result);
+          console.log('Failed to register webhookk', registration.result);
         }
         await getSubscriptionUrl(ctx, accessToken, shop);
       }
